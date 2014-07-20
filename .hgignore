@@ -16,9 +16,8 @@ firs.pnml
 docs_src/readme.txt
 docs/*
 custom_tags.txt
-generated/
+generated/*
 chameleon_cache
-translations/
 
 # Dependency files:
 Makefile.dep
