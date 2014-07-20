@@ -58,6 +58,7 @@ def check_industry_needs_compiling(industry):
         return False
 
 def render_nml(filename):
+    print "Rendering nml for " + filename
     gcc_call_args = ['gcc',
                       '-D',
                       'REPO_REVISION='+str(repo_vars['repo_version']),
@@ -73,6 +74,7 @@ def render_nml(filename):
 
 
 def render_nfo(filename):
+    print "Rendering nfo for " + filename
     nmlc_call_args = ['nmlc',
                       #'--lang-dir=lang',
                       #'--quiet',
@@ -83,7 +85,7 @@ def render_nfo(filename):
 
 
 def render_header_item_pnml(header_item):
-    print "Rendering " + header_item
+    print "Rendering pnml for " + header_item
     template = header_item_templates[header_item + '.pypnml']
     pnml = codecs.open(os.path.join(generated_pnml_path, header_item + '.pnml'), 'w','utf8')
     pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries,
@@ -93,13 +95,14 @@ def render_header_item_pnml(header_item):
 
 
 def render_cargo_pnml(cargo):
-    # save the results of templating
+    print "Rendering pnml for " + cargo.id
     pnml_file = codecs.open(os.path.join(generated_pnml_path, cargo.id + '.pnml'), 'w','utf8')
     pnml_file.write(cargo.render_pnml())
     pnml_file.close()
 
 
 def render_industry_pnml(industry):
+    print "Rendering pnml for " + industry.id
     if check_industry_needs_compiling(industry):
         # save the results of templating
         pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
