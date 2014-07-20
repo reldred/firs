@@ -44,6 +44,15 @@ if not os.path.exists(generated_nml_path):
 grf_nml = codecs.open(os.path.join(firs.generated_files_path, 'firs.nml'),'w','utf8')
 
 
+def check_industry_needs_compiling(industry):
+    test_industry_flag = repo_vars.get('test_industry', None)
+    if test_industry_flag is None or test_industry_flag == '':
+        return True
+    elif test_industry_flag == industry.id:
+        return True
+    else:
+        return False
+
 def render_nml(filename):
     gcc_call_args = ['gcc',
                       '-D',
@@ -59,13 +68,22 @@ def render_nml(filename):
     subprocess.call(gcc_call_args)
 
 
-def render_industry(industry):
-    if repo_vars.get('test_industry', None) == industry.id:
+def render_nfo(filename):
+    nmlc_call_args = ['nmlc',
+                      '--lang-dir=lang',
+                      #'--quiet',
+                      '--nfo',
+                      'generated/nfo/' + filename + '.nfo',
+                      'generated/nml/' + filename + '.nml']
+    subprocess.call(nmlc_call_args)
+
+
+def render_industry_pnml(industry):
+    if check_industry_needs_compiling(industry):
         # save the results of templating
         pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
         pnml_file.write(industry.render_pnml())
         pnml_file.close()
-        render_nml(industry.id)
 
 
 def render_header_item_pnml(header_item):
@@ -75,6 +93,17 @@ def render_header_item_pnml(header_item):
     pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries, global_constants=global_constants,
                                                 utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
     pnml.close()
+
+
+def render_dispatcher(items, renderer):
+    if repo_vars.get('no_mp', None) == 'True':
+        for item in items:
+            renderer(item)
+    else:
+        pool = Pool(processes=16) # 16 is an arbitrary amount that appears to be fast without blocking the system
+        pool.map(renderer, items)
+        pool.close()
+        pool.join()
 
 
 def link_nml(item, dep_path, split=None):
@@ -112,24 +141,21 @@ def main():
     pnml.close()
     render_nml('registered_cargos')
 
-    if repo_vars.get('no_mp', None) == 'True':
-        for industry in industries.registered_industries:
-            render_industry(industry)
-    else:
-        pool = Pool(processes=16) # 16 is an arbitrary amount that appears to be fast without blocking the system
-        pool.map(render_industry, industries.registered_industries)
-        pool.close()
-        pool.join()
+    render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
 
-    for header_item in header_items:
-        render_nml(header_item)
+    # render nml from pnml
+    render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
+    render_dispatcher(header_items, renderer=render_nml)
+
+    # render nfo from nml
+    # !! nothing yet !!
 
     # linker
     print "Linking nml"
     for header_item in header_items:
         link_nml(header_item, header_item, split=None)
     for industry in industries.registered_industries:
-        if repo_vars.get('test_industry', None) == industry.id:
+        if check_industry_needs_compiling(industry):
             link_nml(industry.id, industry.id, split=None)
     grf_nml.close()
     """
