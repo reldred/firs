@@ -1,3 +1,4 @@
+#include "../../src/defines.pnml"
 #include "../../src/templates/tile_fences.pnml"
 #include "../../src/templates/tile_location.pnml"
 #include "../../src/templates/tile_ground_sprite.pnml"
