@@ -140,7 +140,7 @@ def main():
     if repo_vars.get('no_mp', None) == 'True':
         utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
 
-    print "Rendering nml"
+    print "Rendering pnml"
     render_dispatcher(header_items, renderer=render_header_item_pnml)
     render_dispatcher(registered_cargos, renderer=render_cargo_pnml)
     render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
