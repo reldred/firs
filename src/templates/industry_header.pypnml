@@ -11,9 +11,21 @@
 #include "../../src/templates/industry_location.pnml"
 #include "../../src/templates/industry_colour.pnml"
 #include "../../src/templates/industry_cargos.pnml"
+#include "../../src/templates/randomise_primary_production_on_build.pnml"
 
 #include "../../src/templates/sprite_templates.pnml"
+#include "../../src/templates/spritelayouts_groundaware.pnml"
 #include "../../src/basetiles.pnml"
 
 // CTT
-<tal:include define="cargo_table load: ../header_items/cargo_table.pypnml" metal:use-macro="cargo_table" />
+<tal:include metal:use-macro="load: ../header_items/cargo_table.pypnml" />
+// non-action 14 parameters
+<tal:include metal:use-macro="load: ../header_items/parameters.pypnml" />
+// special conditions
+<tal:include metal:use-macro="load: ../header_items/conditions.pypnml" />
+
+<tal:industries repeat="industry registered_industries">
+    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
+
+    }
+</tal:industries>

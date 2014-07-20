@@ -341,7 +341,7 @@ class Industry(object):
         enabled_economies = []
         for i, economy in enumerate(global_constants.economies):
             if self.economy_variations[economy].enabled:
-                enabled_economies.append('economy==' + str(i))
+                enabled_economies.append('param[0]==' + str(i))
         return ' || '.join(enabled_economies)
 
     def unpack_sprite_or_spriteset(self, sprite_or_spriteset, construction_state_num=3, terrain_type='', date_variation_num='0'):
@@ -360,7 +360,8 @@ class Industry(object):
 
     def render_industry_header(self):
         template = templates['industry_header.pypnml']
-        pnml_result = template(registered_cargos=registered_cargos, global_constants=global_constants, utils=utils)
+        pnml_result = template(registered_cargos=registered_cargos, registered_industries=registered_industries,
+                               global_constants=global_constants, utils=utils)
         return pnml_result
 
     def render_pnml(self):

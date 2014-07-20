@@ -7,7 +7,7 @@ relative_map_size = map_size / (256 * 256);
 industry_clusters = (relative_map_size / 2) + 1;
 
 
-param_max_coastal_distance = marine_industry_max_coastal_distance;
-if (marine_industry_max_coastal_distance == 0) {
+param_max_coastal_distance = param[4];
+if (param[4] == 0) {
 	param_max_coastal_distance = 255;
 }
