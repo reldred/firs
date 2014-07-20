@@ -124,15 +124,6 @@ def main():
     if repo_vars.get('no_mp', None) == 'True':
         utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
 
-    if repo_vars.get('no_mp', None) == 'True':
-        for header_item in header_items:
-            render_header_item_pnml(header_items)
-    else:
-        pool = Pool(processes=16) # 16 is an arbitrary amount that appears to be fast without blocking the system
-        pool.map(render_header_item_pnml, header_items)
-        pool.close()
-        pool.join()
-
     template = templates['registered_cargos.pypnml']
     templated_pnml = utils.unescape_chameleon_output(template(registered_cargos=registered_cargos, global_constants=global_constants))
     # save the results of templating
@@ -141,8 +132,10 @@ def main():
     pnml.close()
     render_nml('registered_cargos')
 
+    render_dispatcher(header_items, renderer=render_header_item_pnml)
     render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
 
+    print "Rendering pnnl"
     # render nml from pnml
     render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
     render_dispatcher(header_items, renderer=render_nml)
