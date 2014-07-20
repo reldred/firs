@@ -20,7 +20,7 @@
 #define THIS_STR_DEBUG_TEXT STR_EXTRA_TEXT_DEBUG_SECONDARY
 #endif
 
-switch (FEAT_INDUSTRIES, SELF, ${industry.id}_extra_text_non_debug, economy) {
+switch (FEAT_INDUSTRIES, SELF, ${industry.id}_extra_text_non_debug, param[0]) {
     <tal:build_economies repeat="economy global_constants.economies">
     ${repeat.economy.index}: string(${industry.get_property('extra_text_industry', economy)});
     </tal:build_economies>
@@ -41,7 +41,7 @@ switch (FEAT_INDUSTRIES, SELF, THIS_ID(extra_text), [
 #ifdef THIS_STR_EXTRA_TEXT_PARAM0
 			STORE_TEMP(THIS_STR_EXTRA_TEXT_PARAM0, 256),
 #endif
-			show_debug_texts
+			param[3]
 			]) {
 	1: ${industry.id}_extra_text_debug;
 	${industry.id}_extra_text_non_debug;

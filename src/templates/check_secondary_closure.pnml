@@ -10,7 +10,7 @@
  *
  * used permanent storage: var_closure_counter (15)
  */
- 
+
 /* 50 : 50 chance that we actually close down (extra_callback_info2 contains random bits) */
 switch(FEAT_INDUSTRIES, SELF, THIS_ID(close_random), (extra_callback_info2 & 32)) {
 	0: return CB_RESULT_IND_PROD_CLOSE;
@@ -24,7 +24,7 @@ switch(FEAT_INDUSTRIES, SELF, THIS_ID(had_produced_check), LOAD_PERM(var_closure
 }
 
 /* Check whether we may close industries at all */
-switch(FEAT_INDUSTRIES, SELF, THIS_ID(check_closure), allow_close_secondary) {
+switch(FEAT_INDUSTRIES, SELF, THIS_ID(check_closure), hasbit(param[2], 1)) {
 	1..255: THIS_ID(had_produced_check;)
 	return CB_RESULT_IND_PROD_NO_CHANGE;
 }

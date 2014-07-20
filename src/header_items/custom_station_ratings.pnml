@@ -23,7 +23,7 @@ switch(FEAT_CARGOS, SELF, switch_station_rating_reduced_effect,
 	return;
 }
 
-switch(FEAT_CARGOS, SELF, switch_station_rating, station_rating_algorithm) {
+switch(FEAT_CARGOS, SELF, switch_station_rating, param[5]) {
 	1: switch_station_rating_reduced_effect;
 	2: return 500;
 	CB_FAILED;
