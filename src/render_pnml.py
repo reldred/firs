@@ -57,6 +57,7 @@ def check_industry_needs_compiling(industry):
     else:
         return False
 
+
 def render_nml(filename):
     print "Rendering nml for " + filename
     gcc_call_args = ['gcc',
