@@ -357,8 +357,15 @@ class Industry(object):
         if isinstance(sprite_or_spriteset, Sprite):
             return getattr(sprite_or_spriteset, 'sprite_number' + suffix)
 
+    def render_industry_header(self):
+        template = templates['industry_header.pypnml']
+        pnml_result = template(global_constants=global_constants, utils=utils)
+        return pnml_result
+
     def render_pnml(self):
         industry_template = industry_templates[self.id + '.pypnml']
-        templated_pnml = utils.unescape_chameleon_output(industry_template(industry=self, global_constants=global_constants, utils=utils))
-        return templated_pnml
+        pnml_result = ''
+        pnml_result = pnml_result + self.render_industry_header() # do this first so we can split it off cleanly
+        pnml_result = pnml_result + utils.unescape_chameleon_output(industry_template(industry=self, global_constants=global_constants, utils=utils))
+        return pnml_result
 

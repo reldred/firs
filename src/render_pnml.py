@@ -42,16 +42,11 @@ if not os.path.exists(generated_nml_path):
 # get args passed by makefile
 repo_vars = utils.get_repo_vars(sys)
 
-def render_industry(industry):
-    # save the results of templating
-    pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
-    pnml_file.write(industry.render_pnml())
-    pnml_file.close()
-    render_nml(industry.id)
-
 
 def render_nml(filename):
     gcc_call_args = ['gcc',
+                      '-D',
+                      'REPO_REVISION='+str(repo_vars['repo_version']),
                       '-C',
                       '-E',
                       '-nostdinc',
@@ -63,17 +58,37 @@ def render_nml(filename):
     subprocess.call(gcc_call_args)
 
 
+def render_industry(industry):
+    # save the results of templating
+    pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
+    pnml_file.write(industry.render_pnml())
+    pnml_file.close()
+    render_nml(industry.id)
+
+
+def render_header_item_pnml(header_item):
+    print "Rendering " + header_item
+    template = header_item_templates[header_item + '.pypnml']
+    pnml = codecs.open(os.path.join(generated_pnml_path, header_item + '.pnml'), 'w','utf8')
+    pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries, global_constants=global_constants,
+                                                utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
+    pnml.close()
+
+
 def main():
-    header_items = ['checks','conditions','header','firs','parameters']
-    for header_item in header_items:
-        template = header_item_templates[header_item + '.pypnml']
-        templated_pnml = utils.unescape_chameleon_output(template(registered_industries=registered_industries, global_constants=global_constants, utils=utils, sys=sys, generated_pnml_path=generated_pnml_path))
-        # save the results of templating
-        pnml_file_path = os.path.join(generated_pnml_path, header_item + '.pnml')
-        pnml = codecs.open(pnml_file_path, 'w','utf8')
-        pnml.write(templated_pnml)
-        pnml.close()
-        render_nml(header_item)
+    header_items = ['checks','conditions','header','parameters']
+
+    if repo_vars.get('no_mp', None) == 'True':
+        utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
+
+    if repo_vars.get('no_mp', None) == 'True':
+        for header_item in header_items:
+            render_header_item_pnml(header_items)
+    else:
+        pool = Pool(processes=16) # 16 is an arbitrary amount that appears to be fast without blocking the system
+        pool.map(render_header_item_pnml, header_items)
+        pool.close()
+        pool.join()
 
     template = templates['registered_cargos.pypnml']
     templated_pnml = utils.unescape_chameleon_output(template(registered_cargos=registered_cargos, global_constants=global_constants))
@@ -84,7 +99,6 @@ def main():
     render_nml('registered_cargos')
 
     if repo_vars.get('no_mp', None) == 'True':
-        utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
         for industry in industries.registered_industries:
             render_industry(industry)
     else:
@@ -92,6 +106,31 @@ def main():
         pool.map(render_industry, industries.registered_industries)
         pool.close()
         pool.join()
+
+    for header_item in header_items:
+        render_nml(header_item)
+
+    # linker
+    print "Linking"
+    template = header_item_templates['firs.pypnml']
+    firs_pnml = codecs.open(os.path.join(firs.generated_files_path, 'firs.pnml'), 'w','utf8')
+    firs_pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries, global_constants=global_constants,
+                                                utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
+    firs_pnml.close()
+
+    render_header_item_pnml('firs')
+    gcc_call_args = ['gcc',
+                      '-D',
+                      'REPO_REVISION='+str(repo_vars['repo_version']),
+                      '-C',
+                      '-E',
+                      '-nostdinc',
+                      '-x',
+                      'c-header',
+                      'generated/firs.pnml',
+                      '-o',
+                      'generated/firs.nml']
+    subprocess.call(gcc_call_args)
 
 
 if __name__ == '__main__':

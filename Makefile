@@ -48,7 +48,7 @@ SCRIPT_DIR          ?= build-common
 GRF_FILE            := $(BASE_FILENAME).grf
 NML_FILE            := $(BASE_FILENAME).nml
 # uncomment MAIN_SRC_FILE if you do not want any preprocessing to happen to your source file
-MAIN_SRC_FILE       := $(BASE_FILENAME).pnml
+MAIN_SRC_FILE       := $(BASE_FILENAME).nml
 
 # List of all files which will get shipped
 # documentation files: readme, changelog and license, usually $(DOC_FILES)
@@ -178,9 +178,7 @@ maintainer-clean:: distclean
 # ifdef $(MAIN_SRC_FILE)
 pnml:
 
-nml: $(GENERATE_PNML)
-	$(_E) "[CPP] $(NML_FILE)"
-	$(_V) $(CC) -D REPO_REVISION=$(NEWGRF_VERSION) $(CC_FLAGS) -o $(NML_FILE) $(MAIN_SRC_FILE)
+nml: $(GENERATE_NML)
 
 clean::
 	$(_E) "[CLEAN NML]"
