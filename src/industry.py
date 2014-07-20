@@ -20,6 +20,7 @@ templates = PageTemplateLoader(os.path.join(src_path, 'templates'), format='text
 industry_templates = PageTemplateLoader(os.path.join(src_path, 'industries'), format='text')
 
 from industries import registered_industries
+from cargos import registered_cargos
 
 class Tile(object):
     """ Base class to hold industry tiles"""
@@ -359,7 +360,7 @@ class Industry(object):
 
     def render_industry_header(self):
         template = templates['industry_header.pypnml']
-        pnml_result = template(global_constants=global_constants, utils=utils)
+        pnml_result = template(registered_cargos=registered_cargos, global_constants=global_constants, utils=utils)
         return pnml_result
 
     def render_pnml(self):

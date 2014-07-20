@@ -15,4 +15,5 @@
 #include "../../src/templates/sprite_templates.pnml"
 #include "../../src/basetiles.pnml"
 
-#include "registered_cargos.pnml"
+// CTT
+<tal:include define="cargo_table load: ../header_items/cargo_table.pypnml" metal:use-macro="cargo_table" />

@@ -1,0 +1,11 @@
+/*
+ * ********************************************
+ * Define cargo translation table and refits
+ * ********************************************
+ */
+
+cargotable {
+    <tal:build_cargo_table repeat="cargo registered_cargos">
+        ${cargo.cargo_label.replace('"','')},
+    </tal:build_cargo_table>
+}

@@ -75,6 +75,7 @@ class Cargo(object):
         registered_cargos.append(self)
 
     def render_pnml(self):
-        cargo_template = templates['cargo_props.pypnml']
-        templated_pnml = utils.unescape_chameleon_output(cargo_template(cargo=self))
+        cargo_template = templates['cargo.pypnml']
+        templated_pnml = utils.unescape_chameleon_output(cargo_template(cargo=self,
+                                                         global_constants=global_constants))
         return templated_pnml

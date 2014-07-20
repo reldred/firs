@@ -78,21 +78,29 @@ def render_nfo(filename):
     subprocess.call(nmlc_call_args)
 
 
+def render_header_item_pnml(header_item):
+    print "Rendering " + header_item
+    template = header_item_templates[header_item + '.pypnml']
+    pnml = codecs.open(os.path.join(generated_pnml_path, header_item + '.pnml'), 'w','utf8')
+    pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries,
+                                        registered_cargos=registered_cargos, global_constants=global_constants,
+                                        utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
+    pnml.close()
+
+
+def render_cargo_pnml(cargo):
+    # save the results of templating
+    pnml_file = codecs.open(os.path.join(generated_pnml_path, cargo.id + '.pnml'), 'w','utf8')
+    pnml_file.write(cargo.render_pnml())
+    pnml_file.close()
+
+
 def render_industry_pnml(industry):
     if check_industry_needs_compiling(industry):
         # save the results of templating
         pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
         pnml_file.write(industry.render_pnml())
         pnml_file.close()
-
-
-def render_header_item_pnml(header_item):
-    print "Rendering " + header_item
-    template = header_item_templates[header_item + '.pypnml']
-    pnml = codecs.open(os.path.join(generated_pnml_path, header_item + '.pnml'), 'w','utf8')
-    pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries, global_constants=global_constants,
-                                                utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
-    pnml.close()
 
 
 def render_dispatcher(items, renderer):
@@ -119,34 +127,32 @@ def link_nml(item, dep_path, split=None):
 
 
 def main():
-    header_items = ['checks','conditions','header','parameters']
+    header_items = ['checks','conditions','header','parameters', 'disable_default_cargos', 'cargo_table']
 
     if repo_vars.get('no_mp', None) == 'True':
         utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
 
-    template = templates['registered_cargos.pypnml']
-    templated_pnml = utils.unescape_chameleon_output(template(registered_cargos=registered_cargos, global_constants=global_constants))
-    # save the results of templating
-    pnml = codecs.open(os.path.join(generated_pnml_path, 'registered_cargos.pnml'), 'w','utf8')
-    pnml.write(templated_pnml)
-    pnml.close()
-    render_nml('registered_cargos')
-
+    print "Rendering nml"
     render_dispatcher(header_items, renderer=render_header_item_pnml)
+    render_dispatcher(registered_cargos, renderer=render_cargo_pnml)
     render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
 
-    print "Rendering pnnl"
+    print "Rendering nml from pnml"
     # render nml from pnml
-    render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
     render_dispatcher(header_items, renderer=render_nml)
+    render_dispatcher([cargo.id for cargo in registered_cargos], renderer=render_nml)
+    render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
 
     # render nfo from nml
     # !! nothing yet !!
 
     # linker
     print "Linking nml"
+    # !! replace second param to link_nml with file path
     for header_item in header_items:
         link_nml(header_item, header_item, split=None)
+    for cargo in registered_cargos:
+        link_nml(cargo.id, cargo.id, split=None)
     for industry in industries.registered_industries:
         if check_industry_needs_compiling(industry):
             link_nml(industry.id, industry.id, split=None)
