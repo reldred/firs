@@ -21,8 +21,6 @@
 <tal:include metal:use-macro="load: ../header_items/cargo_table.pypnml" />
 // non-action 14 parameters
 <tal:include metal:use-macro="load: ../header_items/parameters.pypnml" />
-// special conditions
-<tal:include metal:use-macro="load: ../header_items/conditions.pypnml" />
 
 <tal:industries repeat="industry registered_industries">
     item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {

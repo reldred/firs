@@ -41,12 +41,16 @@ if not os.path.exists(generated_pnml_path):
 generated_nml_path = os.path.join(firs.generated_files_path, 'nml')
 if not os.path.exists(generated_nml_path):
     os.mkdir(generated_nml_path)
-grf_nml = codecs.open(os.path.join(firs.generated_files_path, 'firs.nml'),'w','utf8')
+generated_nfo_path = os.path.join(firs.generated_files_path, 'nfo')
+if not os.path.exists(generated_nfo_path):
+    os.mkdir(generated_nfo_path)
+
+grf_nfo = codecs.open(os.path.join(firs.generated_files_path, 'firs.nfo'),'w','utf8')
 
 
 def check_industry_needs_compiling(industry):
     test_industry_flag = repo_vars.get('test_industry', None)
-    if test_industry_flag is None or test_industry_flag == '':
+    if test_industry_flag is None or test_industry_flag == '' or test_industry_flag == 'None':
         return True
     elif test_industry_flag == industry.id:
         return True
@@ -70,7 +74,7 @@ def render_nml(filename):
 
 def render_nfo(filename):
     nmlc_call_args = ['nmlc',
-                      '--lang-dir=lang',
+                      #'--lang-dir=lang',
                       #'--quiet',
                       '--nfo',
                       'generated/nfo/' + filename + '.nfo',
@@ -114,20 +118,20 @@ def render_dispatcher(items, renderer):
         pool.join()
 
 
-def link_nml(item, dep_path, split=None):
+def link_nfo(item, dep_path, split=None):
     #dep_timestamps_new[dep_path] = os.stat(dep_path).st_mtime
-    item_nml = codecs.open(os.path.join('generated', 'nml', item + '.nml'),'r','utf8').read()
+    item_nfo = codecs.open(os.path.join('generated', 'nfo', item + '.nfo'),'r','utf8').read()
     """
     if split is not None:
         # fragile split on some specific nfo, may break; assumes a right-split only
         if split in item_nfo:
             item_nfo = item_nfo.split(split)[1]
     """
-    grf_nml.write(item_nml)
+    grf_nfo.write(item_nfo)
 
 
 def main():
-    header_items = ['checks','conditions','header','parameters', 'disable_default_cargos', 'cargo_table']
+    header_items = ['header', 'parameters', 'checks', 'disable_default_cargos', 'cargo_table']
 
     if repo_vars.get('no_mp', None) == 'True':
         utils.echo_message('Multiprocessing disabled: (NO_MP=True)')
@@ -143,20 +147,31 @@ def main():
     render_dispatcher([cargo.id for cargo in registered_cargos], renderer=render_nml)
     render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
 
+    print "Rendering nfo from nml"
     # render nfo from nml
-    # !! nothing yet !!
+    render_dispatcher(header_items, renderer=render_nfo)
+    render_dispatcher([cargo.id for cargo in registered_cargos], renderer=render_nfo)
+    render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nfo)
 
     # linker
-    print "Linking nml"
-    # !! replace second param to link_nml with file path
+    print "Linking nfo"
+    # !! replace second param to link_nfo with file path
     for header_item in header_items:
-        link_nml(header_item, header_item, split=None)
+        link_nfo(header_item, header_item, split=None)
     for cargo in registered_cargos:
-        link_nml(cargo.id, cargo.id, split=None)
+        link_nfo(cargo.id, cargo.id, split=None)
     for industry in industries.registered_industries:
         if check_industry_needs_compiling(industry):
-            link_nml(industry.id, industry.id, split=None)
-    grf_nml.close()
+            link_nfo(industry.id, industry.id, split=None)
+    grf_nfo.close()
+
+    # some warnings suppressed when we call nforenum; assume nmlc has done the right thing and nforenum is wrong
+    nforenum_call_args = ['nforenum',
+                      '--silent',
+                      '--warning-disable=80,84,90,97,99,100,109,111,118,141,144,147,162,164,170,172,202,204',
+                      'generated/firs.nfo']
+    subprocess.call(nforenum_call_args)
+
     """
     dep_timestamps_file = codecs.open(dep_timestamps_path, 'w', 'utf8')
     dep_timestamps_file.write(json.dumps(dep_timestamps_new))

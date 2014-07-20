@@ -7,13 +7,14 @@
 
 CC_FLAGS ?= -D TEST_INDUSTRY=$(TEST_INDUSTRY) -C -E -nostdinc -x c-header
 
-NML_FILE := generated/firs.nml
+NML_FILE := generated/firs.nfo
 
 GENERATE_NML = $(NML_FILE)
 
 $(NML_FILE): scripts/preprocess.py
 	$(_E) [GENERATE NML]
 	$(PYTHON) scripts/preprocess.py '${REPO_TITLE}' '${REPO_REVISION}' '${TEST_INDUSTRY}' '${NO_MP}'
+#	$(_V) grfcodec -e -s firs generated
 
 ################################################################
 # Definitions which extend the common rules

@@ -253,7 +253,7 @@ clean::
 # target 'grf' which builds the grf from the nml
 ################################################################
 
-$(GRF_FILE): $(GENERATE_GFX) $(GENERATE_NML) $(GENERATE_LNG)
+$(GRF_FILE): $(GENERATE_GFX) $(GENERATE_LNG) $(GENERATE_NML)
 	$(_E) "[NML] $(GRF_FILE)"
 ifeq ($(NML),)
 	$(_E) "No NML compiler found!"
@@ -271,7 +271,7 @@ ifeq ($(shell [ "$(NML_REVISION)" -lt "$(MIN_NML_REVISION)" ] && echo "true" || 
 	$(_V) false
 endif
 endif
-	$(_V) $(NML) $(NML_FLAGS) --grf $(GRF_FILE) $(NML_FILE)
+	$(_V) grfcodec -e -s firs generated
 
 grf: $(GRF_FILE)
 
