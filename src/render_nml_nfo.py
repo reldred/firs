@@ -184,7 +184,7 @@ def main():
     """
     for industry in industries.registered_industries:
         if check_industry_needs_compiling(industry):
-            link_nfo(industry.id, industry.id, split=None)
+            link_nfo(industry.id, industry.id, split=dummy_split)
     grf_nfo.close()
 
     # some warnings suppressed when we call nforenum; assume nmlc has done the right thing and nforenum is wrong

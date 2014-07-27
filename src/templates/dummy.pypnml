@@ -1,3 +1,12 @@
+// Put industry IDs in scope for nml - legacy support, would be better done in the python step using existing methods
+<tal:industries repeat="industry registered_industries">
+    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
+        property {
+            ${industry.get_property_declaration('name')}
+        }
+    }
+</tal:industries>
+
 // Dummy strings
 switch(FEAT_INDUSTRIES, SELF, DUMMY_CALLBACK_INDUSTRY, 0xFFFFFFFF) {
     <tal:strings repeat="string utils.parse_base_lang(extra_strings=False)">
@@ -24,9 +33,3 @@ item(FEAT_CARGOS, passengers, 0x00) {
     property { sprite: NEW_CARGO_SPRITE; }
     graphics { default: DUMMY_CALLBACK_CARGO; }
 }
-
-// Put industry IDs in scope for nml - legacy support, would be better done in the python step using existing methods
-<tal:industries repeat="industry registered_industries">
-    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
-    }
-</tal:industries>

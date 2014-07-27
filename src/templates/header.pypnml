@@ -99,3 +99,11 @@ disable_item(FEAT_INDUSTRIES, 0, 36);
 
 #include "../../src/templates/custom_station_ratings.pnml"
 
+// Put industry IDs in scope for nml - legacy support, would be better done in the python step using existing methods
+<tal:industries repeat="industry registered_industries">
+    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
+        property {
+            ${industry.get_property_declaration('name')}
+        }
+    }
+</tal:industries>
