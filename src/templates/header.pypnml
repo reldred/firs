@@ -92,21 +92,10 @@ basecost {
 
 #include "../../src/defines.pnml"
 
-#include "../../src/header_items/cargo_icon_template.pnml"
-#include "../../src/header_items/custom_station_ratings.pnml"
+#include "../../src/templates/cargo_icon_template.pnml"
 
 //disable the default industries
 disable_item(FEAT_INDUSTRIES, 0, 36);
 
-#include "../../src/templates/tile_fences.pnml"
-#include "../../src/templates/tile_location.pnml"
-#include "../../src/templates/tile_ground_sprite.pnml"
-#include "../../src/templates/tile_cargos.pnml"
+#include "../../src/templates/custom_station_ratings.pnml"
 
-#include "../../src/templates/sprite_templates.pnml"
-#include "../../src/templates/industry_location.pnml"
-#include "../../src/templates/industry_colour.pnml"
-#include "../../src/templates/industry_cargos.pnml"
-#include "../../src/templates/randomise_primary_production_on_build.pnml"
-
-#include "../../src/basetiles.pnml"

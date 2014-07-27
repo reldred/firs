@@ -20,6 +20,7 @@ templates = PageTemplateLoader(os.path.join(src_path, 'templates'), format='text
 industry_templates = PageTemplateLoader(os.path.join(src_path, 'industries'), format='text')
 
 from cargos import registered_cargos
+from industries import registered_industries
 
 class Cargo(object):
     """ Base class to hold cargos"""
@@ -77,5 +78,7 @@ class Cargo(object):
     def render_pnml(self):
         cargo_template = templates['cargo.pypnml']
         templated_pnml = utils.unescape_chameleon_output(cargo_template(cargo=self,
-                                                         global_constants=global_constants))
+                                                         global_constants=global_constants,
+                                                         utils=utils,
+                                                         registered_industries=registered_industries))
         return templated_pnml

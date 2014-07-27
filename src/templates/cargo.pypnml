@@ -1,6 +1,3 @@
-#include "../../src/header_items/cargo_icon_template.pnml"
-#include "../../src/header_items/custom_station_ratings.pnml"
-
 cargo_icon_template(cargoicon_${cargo.id}, ${cargo.icon_indices[0]}, ${cargo.icon_indices[1]})
 
 <tal:build_economies repeat="economy global_constants.economies">

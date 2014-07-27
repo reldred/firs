@@ -17,7 +17,7 @@ def unescape_chameleon_output(escaped_nml):
     return escaped_nml
 
 
-def parse_base_lang():
+def parse_base_lang(extra_strings=True):
     print "[PARSE BASE LANG & EXTRA STRINGS] utils.py"
 
     import os.path
@@ -32,10 +32,11 @@ def parse_base_lang():
     base_lang_file = codecs.open(os.path.join('lang', 'english.lng'), 'r','utf8')
     strings = split_nml_string_lines(base_lang_file.readlines())
 
-    extra_strings_file = codecs.open(os.path.join('docs_src', 'extra_strings.lng'), 'r','utf8')
-    extra_strings = split_nml_string_lines(extra_strings_file.readlines())
-    for i in extra_strings:
-        strings[i] = extra_strings[i]
+    if extra_strings == True:
+        extra_strings_file = codecs.open(os.path.join('docs_src', 'extra_strings.lng'), 'r','utf8')
+        extra_strings = split_nml_string_lines(extra_strings_file.readlines())
+        for i in extra_strings:
+            strings[i] = extra_strings[i]
 
     return strings
 

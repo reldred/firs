@@ -1,7 +1,10 @@
-#include "../../src/defines.pnml"
+// CTT
+<tal:include metal:use-macro="load: cargo_table.pypnml" />
 
-#include "../../src/header_items/cargo_icon_template.pnml"
-#include "../../src/header_items/custom_station_ratings.pnml"
+// Parameters
+<tal:include metal:use-macro="load: parameters.pypnml" />
+
+#include "../../src/defines.pnml"
 
 #include "../../src/templates/tile_fences.pnml"
 #include "../../src/templates/tile_location.pnml"
@@ -16,14 +19,3 @@
 #include "../../src/templates/sprite_templates.pnml"
 #include "../../src/templates/spritelayouts_groundaware.pnml"
 #include "../../src/basetiles.pnml"
-
-// CTT
-<tal:include metal:use-macro="load: ../header_items/cargo_table.pypnml" />
-// non-action 14 parameters
-<tal:include metal:use-macro="load: ../header_items/parameters.pypnml" />
-
-<tal:industries repeat="industry registered_industries">
-    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
-
-    }
-</tal:industries>

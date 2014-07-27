@@ -359,6 +359,7 @@ class Industry(object):
             return getattr(sprite_or_spriteset, 'sprite_number' + suffix)
 
     def render_industry_header(self):
+        # attach any cpp defines or includes needed
         template = templates['industry_header.pypnml']
         pnml_result = template(registered_cargos=registered_cargos, registered_industries=registered_industries,
                                global_constants=global_constants, utils=utils)
@@ -367,7 +368,7 @@ class Industry(object):
     def render_pnml(self):
         industry_template = industry_templates[self.id + '.pypnml']
         pnml_result = ''
-        pnml_result = pnml_result + self.render_industry_header() # do this first so we can split it off cleanly
-        pnml_result = pnml_result + utils.unescape_chameleon_output(industry_template(industry=self, global_constants=global_constants, utils=utils))
+        pnml_result += self.render_industry_header()
+        pnml_result += utils.unescape_chameleon_output(industry_template(industry=self, global_constants=global_constants, utils=utils))
         return pnml_result
 

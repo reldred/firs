@@ -7,8 +7,8 @@
 #include "nml/checks.nml"
 #include "nml/conditions.nml"
 
-#include "../src/header_items/cargo_icon_template.pnml"
-#include "../src/header_items/custom_station_ratings.pnml"
+#include "../src/templates/cargo_icon_template.pnml"
+#include "../src/templates/custom_station_ratings.pnml"
 #include "nml/registered_cargos.nml"
 
 //disable the default industries

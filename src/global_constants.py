@@ -67,7 +67,7 @@ industry_numeric_ids = dict(coal_mine = 0x00,
                             food_market = 0x3B,
                             petrol_pump = 0x3C,
                             general_store = 0x3D,
-                            #IND_VACANT_ID = 0x3E,
+                            dummy_industry = 0x3E, # used for dummy language switch
                             builders_yard = 0x3F)
 #3F is last ID to be used (64 industry limit)
 
