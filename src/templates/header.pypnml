@@ -99,11 +99,19 @@ disable_item(FEAT_INDUSTRIES, 0, 36);
 
 #include "../../src/templates/custom_station_ratings.pnml"
 
-// Put industry IDs in scope for nml - legacy support, would be better done in the python step using existing methods
+// Put industry text in scope
 <tal:industries repeat="industry registered_industries">
-    item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
-        property {
-            ${industry.get_property_declaration('name')}
+    <tal:economies repeat="economy global_constants.economies">
+        if (param[0]==${repeat.economy.index}) {
+            <tal:industry_on_or_off condition="industry.get_property('enabled', economy) == True">
+                item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
+                    property {
+                        ${industry.get_property_declaration('substitute')}
+                        ${industry.get_property_declaration('override')}
+                        ${industry.get_property_declaration('name', economy)}
+                    }
+                }
+            </tal:industry_on_or_off>
         }
-    }
+    </tal:economies>
 </tal:industries>
