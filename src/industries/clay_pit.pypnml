@@ -932,6 +932,7 @@ CHECK_FOUNDER       (THIS_ID(brick_works))
 SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
 
 ${industry.get_primary_supplies_stuff()}
+${industry.get_extra_text()}
 
 #include "../../src/templates/check_availability.pnml"
 

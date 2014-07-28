@@ -110,6 +110,7 @@ ${industry.get_industry_layouts_as_tilelayouts()}
  * *************************************************/
 
 ${industry.get_primary_supplies_stuff()}
+${industry.get_extra_text()}
 
 #include "../../src/templates/check_availability.pnml"
 

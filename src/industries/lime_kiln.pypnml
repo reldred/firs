@@ -74,7 +74,7 @@ SWITCH_COLOUR_SCHEME1(${industry.id}_colour)
 #include "../../src/templates/check_secondary_production_level.pnml"
 #include "../../src/templates/check_secondary_closure.pnml"
 
-${industry.get_extra_text_secondary()}
+${industry.get_extra_text()}
 
 #include "../../src/templates/check_availability.pnml"
 

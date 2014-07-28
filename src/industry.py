@@ -143,7 +143,9 @@ class IndustryProperties(object):
         # not nml properties
         self.enabled = kwargs.get('enabled', False)
         self.override_default_construction_states = kwargs.get('override_default_construction_states', False)
+        self.prod_type = kwargs.get('prod_type', None) # used to select processing and extra templates
         self.extra_text_industry = kwargs.get('extra_text_industry', 'STR_EMPTY') # value is string(s) to return for corresponding nml cb, use 'STR_GENERIC_NEWLINE' in default property declaration if no string needed
+
         # nml properties we want to prevent being set for one reason or another
         if 'conflicting_ind_types' in kwargs:
             raise Exception("Don't set conflicting_ind_types property; use the FIRS location checks for conflicting industry (these are more flexible).")
@@ -279,8 +281,14 @@ class Industry(object):
         template = templates['industry_properties.pynml']
         return utils.unescape_chameleon_output(template(industry=self, global_constants=global_constants))
 
-    def get_extra_text_secondary(self):
-        template = templates['extra_text_secondary.pynml']
+    def get_extra_text(self):
+        prod_type = self.get_property('prod_type', None)
+        if prod_type == 'PROD_TYPE_SECONDARY':
+            template = templates['extra_text_secondary.pynml']
+        else:
+            # !! debug only, remove !!
+            print 'boo this is not good ' + self.id
+            template = templates['extra_text_secondary.pynml']
         return utils.unescape_chameleon_output(template(industry=self, global_constants=global_constants))
 
     def get_property(self, property_name, economy):
