@@ -3,31 +3,3 @@
     item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
     }
 </tal:industries>
-<!--!
-// Dummy strings
-switch(FEAT_INDUSTRIES, SELF, DUMMY_CALLBACK_INDUSTRY, 0xFFFFFFFF) {
-    <tal:strings repeat="string utils.parse_base_lang(extra_strings=False)">
-    ${repeat.string.index}: string(${string});
-    </tal:strings>
-}
-item(FEAT_INDUSTRIES, coal_mine, 0x00) {
-    graphics { default: DUMMY_CALLBACK_INDUSTRY; }
-}
-switch(FEAT_INDUSTRYTILES, SELF, DUMMY_CALLBACK_INDUSTRY_TILES, 0xFFFFFFFF) {
-    <tal:strings repeat="string utils.parse_base_lang(extra_strings=False)">
-    ${repeat.string.index}: string(${string});
-    </tal:strings>
-}
-item(FEAT_INDUSTRYTILES, dummy_tile, 0xFD) {
-    graphics { default: DUMMY_CALLBACK_INDUSTRY_TILES; }
-}
-switch(FEAT_CARGOS, SELF, DUMMY_CALLBACK_CARGO, 0xFFFFFFFF) {
-    <tal:strings repeat="string utils.parse_base_lang(extra_strings=False)">
-    ${repeat.string.index}: string(${string});
-    </tal:strings>
-}
-item(FEAT_CARGOS, passengers, 0x00) {
-    property { sprite: NEW_CARGO_SPRITE; }
-    graphics { default: DUMMY_CALLBACK_CARGO; }
-}
--->
