@@ -46,7 +46,6 @@ if not os.path.exists(generated_nfo_path):
     os.mkdir(generated_nfo_path)
 
 header_pnml = StringIO.StringIO()
-dummy_pnml = StringIO.StringIO()
 grf_nfo = codecs.open(os.path.join(firs.generated_files_path, 'firs.nfo'),'w','utf8')
 
 
@@ -99,8 +98,6 @@ def render_industry_pnml(industry):
     if check_industry_needs_compiling(industry):
         # save the results of templating
         pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
-        #pnml_file.write(header_pnml.getvalue())
-        pnml_file.write(dummy_pnml.getvalue())
         pnml_file.write(industry.render_pnml())
         pnml_file.close()
 
@@ -148,14 +145,6 @@ def main():
     header_pnml_file.write(header_pnml.getvalue())
     header_pnml_file.close()
 
-    template = templates['dummy.pypnml']
-    dummy_pnml.write(utils.unescape_chameleon_output(template(registered_industries=registered_industries,
-                            registered_cargos=registered_cargos, global_constants=global_constants,
-                            utils=utils, sys=sys, generated_pnml_path=generated_pnml_path)))
-    dummy_pnml_file = codecs.open(os.path.join(generated_pnml_path, 'dummy.pnml'), 'w','utf8')
-    dummy_pnml_file.write(dummy_pnml.getvalue()) # only writing this so it's easy to check output
-    dummy_pnml_file.close()
-
     render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
 
     print "Rendering nml from pnml"
@@ -175,16 +164,15 @@ def main():
 
     # linker
     print "Linking nfo"
-    dummy_split = "// DUMMY_CALLBACK_CARGO;"
 
     link_nfo('header', header_item, split=None)
     """
     for cargo in registered_cargos:
-        link_nfo(cargo.id, cargo.id, split=dummy_split)
+        link_nfo(cargo.id, cargo.id, split=None)
     """
     for industry in industries.registered_industries:
         if check_industry_needs_compiling(industry):
-            link_nfo(industry.id, industry.id, split=dummy_split)
+            link_nfo(industry.id, industry.id, split=None)
     grf_nfo.close()
 
     # some warnings suppressed when we call nforenum; assume nmlc has done the right thing and nforenum is wrong
