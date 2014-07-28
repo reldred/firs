@@ -157,6 +157,7 @@ STR_PORT_PRODUCTION_1X                                                          
 STR_PORT_PRODUCTION_2X                                                          :{BLACK}Current production: {YELLOW}Enhanced (double){}{}{BLACK}To keep this level, deliver {SIGNED_WORD} units of cargo within three months, or {SIGNED_WORD} units of cargo to raise to quadruple production
 STR_PORT_PRODUCTION_4X                                                          :{BLACK}Current production: {YELLOW}Gung ho (quadruple){}{}{BLACK}To keep this level, deliver {SIGNED_WORD} units of cargo within three months
 STR_GENERIC_NEWLINE                                                             :{}
+STR_EMPTY                                                                       :
 
 STR_FUND_BASIC_FARM                                                             :{}{BLACK}Location: {YELLOW}Cannot be funded on snow or in deserts.
 STR_FUND_MIXED_FARM                                                             :{}{BLACK}Location: {YELLOW}Cannot be funded on snow or in deserts.
