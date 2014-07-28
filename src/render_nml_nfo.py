@@ -96,7 +96,6 @@ def render_cargo_pnml(cargo):
 def render_industry_pnml(industry):
     print "Rendering pnml for " + industry.id
     if check_industry_needs_compiling(industry):
-        # save the results of templating
         pnml_file = codecs.open(os.path.join(generated_pnml_path, industry.id + '.pnml'), 'w','utf8')
         pnml_file.write(industry.render_pnml())
         pnml_file.close()
@@ -148,28 +147,16 @@ def main():
     render_dispatcher(industries.registered_industries, renderer=render_industry_pnml)
 
     print "Rendering nml from pnml"
-    # render nml from pnml
     render_dispatcher(['header'], renderer=render_nml)
-    #render_dispatcher([cargo.id for cargo in registered_cargos], renderer=render_nml)
     render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nml)
 
     print "Rendering nfo from nml"
-    # render nfo from nml
-
     render_dispatcher(['header'], renderer=render_nfo)
-    """
-    render_dispatcher([cargo.id for cargo in registered_cargos], renderer=render_nfo)
-    """
     render_dispatcher([industry.id for industry in industries.registered_industries], renderer=render_nfo)
 
-    # linker
     print "Linking nfo"
 
     link_nfo('header', header_item, split=None)
-    """
-    for cargo in registered_cargos:
-        link_nfo(cargo.id, cargo.id, split=None)
-    """
     for industry in industries.registered_industries:
         if check_industry_needs_compiling(industry):
             link_nfo(industry.id, industry.id, split=None)
