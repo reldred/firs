@@ -102,7 +102,7 @@ disable_item(FEAT_INDUSTRIES, 0, 36);
 // Put industry text in scope
 <tal:industries repeat="industry registered_industries">
     #define THIS_ID(...) ${industry.id}_ ## __VA_ARGS__
-    ${industry.get_extra_text()}
+    ${industry.get_extra_text_switch()}
     <tal:economies repeat="economy global_constants.economies">
         if (param[0]==${repeat.economy.index}) {
             <tal:industry_on_or_off condition="industry.get_property('enabled', economy) == True">

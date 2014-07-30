@@ -369,7 +369,7 @@ item(FEAT_INDUSTRIES, fishing_grounds, ${industry.get_numeric_id()}) {
 		monthly_prod_change:     return CB_RESULT_IND_PROD_NO_CHANGE;
 		random_prod_change:      return CB_RESULT_IND_PROD_NO_CHANGE;
 		build_prod_change:       ${industry.id}_randomise_primary_production_on_build; // initial production customised to Fishing Grounds
-//		extra_text_industry:     // no extra text. No production increase by means of FMSP
+        extra_text_industry:     ${industry.id}_extra_text;
 		colour:                  ${industry.id}_colour;
 	}
 }

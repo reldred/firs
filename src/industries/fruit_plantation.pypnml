@@ -394,7 +394,7 @@ CHECK_FOUNDER       (${industry.id}_brewery)
 SWITCH_COLOUR_SCHEME1(${industry.id}_colour)
 
 ${industry.get_primary_supplies_stuff()}
-${industry.get_extra_text()}
+${industry.get_extra_text_switch()}
 
 #include "../../src/templates/check_availability.pnml"
 
@@ -410,7 +410,6 @@ item(FEAT_INDUSTRIES, ${industry.id}, ${industry.get_numeric_id()}) {
         random_prod_change:      return CB_RESULT_IND_PROD_NO_CHANGE;
 		build_prod_change:       randomise_primary_production_on_build;
 		extra_text_fund:         return string(STR_FUND_FRUIT_PLANTATION);
-		extra_text_industry:     ${industry.id}_extra_text;
 		colour:                  ${industry.id}_colour;
 	}
 }
