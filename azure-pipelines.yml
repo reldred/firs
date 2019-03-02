@@ -45,3 +45,7 @@ jobs:
     displayName: 'Make'
 
   - task: PublishBuildArtifacts@1
+    displayName: Publish
+    inputs:
+      PathtoPublish: docs
+      ArtifactName: 'docs'
