@@ -28,3 +28,11 @@ jobs:
 
   - script: python -m pip install chameleon
     displayName: 'Install Chameleon'
+
+  - script: python -m pip install markdown
+    displayName: 'Install Markdown'
+
+  - script: python -m pip install nml
+    displayName: 'Install NML'
+
+  - script: make
