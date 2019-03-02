@@ -44,7 +44,7 @@ jobs:
   - script: make
     displayName: 'Make'
 
-- task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@0
+  - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@0
     displayName: 'Publishes to GitHub Pages'
     inputs:
         githubusername: andythenorth
