@@ -41,8 +41,8 @@ jobs:
   - script: python -m pip install pillow
     displayName: 'Install Pillow'
 
-  - script: make
-    displayName: 'Make'
+  - script: make html_docs
+    displayName: 'Make (Docs Only)'
 
   - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@0
     displayName: 'Publishes to GitHub Pages'
