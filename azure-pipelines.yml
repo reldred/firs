@@ -44,11 +44,8 @@ jobs:
   - script: make html_docs
     displayName: 'Make (Docs Only)'
 
-  - task: AccidentalFish.githubpages-publish.AccidentalFish.GitHubPages-Publish.GitHubPagesPublish@0
-    displayName: 'Publishes to GitHub Pages'
+  - task: PublishBuildArtifacts@1
+    displayName: Publish
     inputs:
-        githubusername: andythenorth
-        githubaccesstoken: b8fc99f59f646df4426238f87f16488b3803f219
-        repositoryname: firs
-        PathtoPublish: docs
-        ArtifactName: 'docs'
+      PathtoPublish: docs
+      ArtifactName: 'docs'
