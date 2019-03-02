@@ -44,9 +44,6 @@ jobs:
   - script: make html_docs
     displayName: 'Make (Docs Only)'
 
-  - checkout: self
-    persistCredentials: true
-
   - task: PublishBuildArtifacts@1
     displayName: Publish
     inputs:
