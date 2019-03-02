@@ -40,3 +40,6 @@ jobs:
 
   - script: python -m pip install pillow
     displayName: 'Install Pillow'
+
+  - script: make
+    displayName: 'Make'
