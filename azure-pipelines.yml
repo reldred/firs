@@ -35,4 +35,8 @@ jobs:
   - script: python -m pip install nml
     displayName: 'Install NML'
 
-  - script: make
+  - script: python -m pip install ply
+    displayName: 'Install PLY'
+
+  - script: python -m pip install pillow
+    displayName: 'Install Pillow'
