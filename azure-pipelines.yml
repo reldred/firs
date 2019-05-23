@@ -15,7 +15,7 @@ jobs:
     matrix:
       Python35:
         python.version: '3.5'
-    maxParallel: 4
+    maxParallel: 16
 
   steps:
   - task: UsePythonVersion@0
@@ -41,8 +41,8 @@ jobs:
   - script: python -m pip install pillow
     displayName: 'Install Pillow'
 
-  - script: make html_docs
-    displayName: 'Make (Docs Only)'
+  - script: make bundle_tar PW=16
+    displayName: 'Make Bundle (16 pool workers)'
 
   - task: PublishBuildArtifacts@1
     displayName: Publish
