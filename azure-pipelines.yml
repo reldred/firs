@@ -47,7 +47,5 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish
     inputs:
-      PathtoPublish: docs
-      ArtifactName: 'docs'
-      PathtoPublish: firs-1.tar
-      ArtifactName: 'firs-1.tar'
+      PathtoPublish: $(Build.ArtifactStagingDirectory)
+      ArtifactName: 'release'
