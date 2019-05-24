@@ -49,3 +49,5 @@ jobs:
     inputs:
       PathtoPublish: docs
       ArtifactName: 'docs'
+      PathtoPublish: firs-1.tar
+      ArtifactName: 'firs-1.tar'
