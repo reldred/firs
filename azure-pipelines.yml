@@ -47,5 +47,9 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish
     inputs:
-      PathtoPublish: $(Build.ArtifactStagingDirectory)/*
-      ArtifactName: 'release'
+      PathtoPublish: $(Build.ArtifactStagingDirectory)/docs
+      ArtifactName: 'docs'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/firs-1.tar'
+      artifactName: bundle_tar
