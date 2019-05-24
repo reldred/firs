@@ -38,7 +38,7 @@ jobs:
   - script: python -m pip install ply
     displayName: 'Install PLY'
 
-  - script: python -m pip install pillow
+  - script: python -m pip install pillow==4.0.0
     displayName: 'Install Pillow'
 
   - script: make bundle_tar PW=16
