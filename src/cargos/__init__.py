@@ -426,15 +426,14 @@ from cargos import textiles
 textiles.cargo.register()
 """
 
-""" BLTC
 from cargos import tin
-tin.cargo.register()
-"""
 
-""" BLTC
+tin.cargo.register()
+
+
 from cargos import tinplate
+
 tinplate.cargo.register()
-"""
 
 from cargos import tyres
 
@@ -444,6 +443,9 @@ tyres.cargo.register()
 from cargos import urea
 urea.cargo.register()
 """
+from cargos import vegetables
+
+vegetables.cargo.register()
 
 from cargos import vehicle_bodies
 

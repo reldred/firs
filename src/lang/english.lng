@@ -26,6 +26,7 @@ STR_PARAM_VALUE_ECONOMIES_BASIC_ARCTIC                                          
 STR_PARAM_VALUE_ECONOMIES_BASIC_TROPIC                                          :Tropic Basic
 STR_PARAM_VALUE_ECONOMIES_BETTER_LIVING_THROUGH_CHEMISTRY                       :Better Living Through Chemistry
 STR_PARAM_VALUE_ECONOMIES_IN_A_HOT_COUNTRY                                      :In A Hot Country
+STR_PARAM_VALUE_ECONOMIES_MILD_MILD_WEST                                        :Mild Mild West
 STR_PARAM_VALUE_ECONOMIES_STEELTOWN                                             :Steeltown
 
 STR_CARGO_SUBTYPE_DISPLAY_CARGO_SUPPLIED_FLAG                                   : {BLACK}(supplied)
@@ -51,6 +52,7 @@ STR_CARGO_NAME_ALUMINIUM                                                        
 STR_CARGO_NAME_ALUMINIA                                                         :Aluminia
 STR_CARGO_NAME_AMMONIA                                                          :Ammonia
 STR_CARGO_NAME_AMMONIUM_NITRATE                                                 :Ammonium Nitrate
+STR_CARGO_NAME_APPLES                                                           :Apples
 STR_CARGO_NAME_BAUXITE                                                          :Bauxite
 STR_CARGO_NAME_BEANS                                                            :Beans
 STR_CARGO_NAME_BUILDING_MATERIALS                                               :Building Materials
@@ -136,6 +138,7 @@ STR_CARGO_NAME_TIN                                                              
 STR_CARGO_NAME_TINPLATE                                                         :Tinplate
 STR_CARGO_NAME_TYRES                                                            :Tyres
 STR_CARGO_NAME_UREA                                                             :Urea
+STR_CARGO_NAME_VEGETABLES                                                       :Vegetables
 STR_CARGO_NAME_VEHICLE_BODIES                                                   :Vehicle Bodies
 STR_CARGO_NAME_VEHICLE_ENGINES                                                  :Vehicle Engines
 STR_CARGO_NAME_VEHICLE_PARTS                                                    :Vehicle Parts
@@ -151,6 +154,7 @@ STR_CARGO_UNIT_ALUMINIA                                                         
 STR_CARGO_UNIT_ALUMINIUM                                                        :{WEIGHT} of aluminium
 STR_CARGO_UNIT_AMMONIA                                                          :{VOLUME} of ammonia
 STR_CARGO_UNIT_AMMONIUM_NITRATE                                                 :{VOLUME} of ammonium nitrate
+STR_CARGO_UNIT_APPLES                                                           :{WEIGHT} of apples
 STR_CARGO_UNIT_BAUXITE                                                          :{WEIGHT} of bauxite
 STR_CARGO_UNIT_BEANS                                                            :{WEIGHT} of beans
 STR_CARGO_UNIT_BUILDING_MATERIALS                                               :{WEIGHT} of building materials
@@ -236,6 +240,7 @@ STR_CARGO_UNIT_TIN                                                              
 STR_CARGO_UNIT_TINPLATE                                                         :{WEIGHT} of tinplate
 STR_CARGO_UNIT_TYRES                                                            :{WEIGHT} of tyres
 STR_CARGO_UNIT_UREA                                                             :{WEIGHT} of urea
+STR_CARGO_UNIT_VEGETABLES                                                       :{WEIGHT} of vegetables
 STR_CARGO_UNIT_VEHICLE_BODIES                                                   :{WEIGHT} of vehicle bodies
 STR_CARGO_UNIT_VEHICLE_ENGINES                                                  :{WEIGHT} of vehicle engines
 STR_CARGO_UNIT_VEHICLE_PARTS                                                    :{WEIGHT} of vehicle parts
@@ -252,6 +257,7 @@ STR_CID_ALUMINIA                                                                
 STR_CID_ALUMINIUM                                                               :{TINYFONT}AM
 STR_CID_AMMONIA                                                                 :{TINYFONT}AO
 STR_CID_AMMONIUM_NITRATE                                                        :{TINYFONT}AN
+STR_CID_APPLES                                                                  :{TINYFONT}AP
 STR_CID_BAUXITE                                                                 :{TINYFONT}BX
 STR_CID_BEANS                                                                   :{TINYFONT}BN
 STR_CID_BUILDING_MATERIALS                                                      :{TINYFONT}BM
@@ -336,6 +342,7 @@ STR_CID_TIN                                                                     
 STR_CID_TINPLATE                                                                :{TINYFONT}TP
 STR_CID_TYRES                                                                   :{TINYFONT}TY
 STR_CID_UREA                                                                    :{TINYFONT}UR
+STR_CID_VEGETABLES                                                              :{TINYFONT}VG
 STR_CID_VEHICLE_BODIES                                                          :{TINYFONT}VB
 STR_CID_VEHICLE_ENGINES                                                         :{TINYFONT}VE
 STR_CID_VEHICLE_PARTS                                                           :{TINYFONT}VP
