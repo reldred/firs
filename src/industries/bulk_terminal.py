@@ -33,6 +33,12 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].prod_cargo_types_with_multiplier
 ###industry.economy_variations['BETTER_LIVING_THROUGH_CHEMISTRY'].accept_cargo_types = []
 ###industry.economy_variations['BETTER_LIVING_THROUGH_CHEMISTRY'].prod_cargo_types_with_multipliers = [('OIL_', 20), ('POTA', 12), ('PHOS', 12), ('MEOH', 12)]
 
+industry.economy_variations["MILD_MILD_WEST"].enabled = True
+#industry.economy_variations["MILD_MILD_WEST"].accept_cargo_types = ["FOOD", "POTA", "CHLO"]
+industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_multipliers = [
+    ("IORE", 19),
+]
+
 industry.economy_variations["STEELTOWN"].enabled = True
 industry.economy_variations["STEELTOWN"].accept_cargo_types = ["FOOD", "POTA", "CHLO"]
 industry.economy_variations["STEELTOWN"].prod_cargo_types_with_multipliers = [
@@ -42,6 +48,7 @@ industry.economy_variations["STEELTOWN"].prod_cargo_types_with_multipliers = [
     ("FECR", 14),
     ("ALUM", 11),
 ]
+
 
 industry.add_tile(
     id="bulk_terminal_tile_1",

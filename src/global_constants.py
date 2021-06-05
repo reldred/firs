@@ -1,4 +1,9 @@
 # Definition of numeric IDs for industries
+# 127 is last ID to be used (128 industry limit, zero-based)
+# see also why 128 is a hard limit as of 2020 http://webster.openttdcoop.org/?channel=openttd&date=1586563200#1586641232
+# if 128 is hit, will have to manually assign IDs per economy
+# possibly auto-assignment, but non-alphabetised and with a placeholder option for removals, i.e. a system of 64 slots, and slots are occupied or not
+# a pure alphabetised list for auto-IDs will constantly wreck savegames, does that matter?
 industry_numeric_ids = dict(
     coal_mine=0,
     plaza = 1,
@@ -97,7 +102,7 @@ industry_numeric_ids = dict(
     integrated_steel_mill=94,
     wire_and_section_mill=95,
     body_plant=96,
-    ###BLTC###tinplate_works = 97,
+    tinplate_works = 97,
     cider_mill = 98,
     lime_kiln=99,
     ###BLTC###factory_1 = 100,
@@ -115,11 +120,6 @@ industry_numeric_ids = dict(
     ###BLTC###ethylene_cracker = 112,
     ##IAHC?##sugar_refinery = 113,
 )
-# 127 is last ID to be used (128 industry limit, zero-based)
-# see also why 128 is a hard limit as of 2020 http://webster.openttdcoop.org/?channel=openttd&date=1586563200#1586641232
-# if 128 is hit, will have to manually assign IDs per economy
-# possibly auto-assignment, but non-alphabetised and with a placeholder option for removals, i.e. a system of 64 slots, and slots are occupied or not
-# a pure alphabetised list for auto-IDs will constantly wreck savegames, does that matter?
 
 # Definition of industry tile numeric IDs
 # tiles 0-xxx currently vacant

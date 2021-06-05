@@ -32,6 +32,17 @@ industry.economy_variations["BASIC_ARCTIC"].prod_cargo_types_with_multipliers = 
 ###industry.economy_variations['BETTER_LIVING_THROUGH_CHEMISTRY'].accept_cargo_types = ['POWR', 'RUBR', 'BOOM']
 ###industry.economy_variations['BETTER_LIVING_THROUGH_CHEMISTRY'].prod_cargo_types_with_multipliers = [('COPR', 10), ('VEHI', 14), ('ALUM', 12), ('WDPR', 14), ('STEL', 14)]
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
+"""
+industry.economy_variations["MILD_MILD_WEST"].accept_cargo_types = [
+    "STSE",
+    "PIPE",
+    "CMNT",
+    "LYE_",
+]  # FOOD was tried, but results in more complex cargo flow diagram
+"""
+industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_multipliers = [
+    ("PORE", 16),
+]
 
 # in Steeltown, there is a deliberate feedback loop with ZINC -> PIPE -> wharf, same for SOAP
 # this is to allow an easy kickstart of ENSP at the wharf, when all other chains are so tightly connected

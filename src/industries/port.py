@@ -70,6 +70,16 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].prod_cargo_types_with_multiplier
 # industry.economy_variations['IN_A_HOT_COUNTRY'].accept_cargo_types = ['DIAM', 'EOIL', 'JAVA', 'WDPR']
 # industry.economy_variations['IN_A_HOT_COUNTRY'].prod_cargo_types_with_multipliers = [('GOOD', 14), ('SASH', 12)]
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
+industry.economy_variations["MILD_MILD_WEST"].accept_cargo_types = [
+    "GOOD",
+    "KAOL",
+    "FOOD",
+]
+industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_multipliers = [
+    ("ENSP", 19),
+    ("FMSP", 7),
+    ("RFPR", 19),
+]
 
 industry.add_tile(
     id="port_tile_1",

@@ -30,6 +30,9 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].prod_cargo_types_with_multiplier
     ("PETR", 7),
 ]
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
+industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_multipliers = [
+    ("OIL_", 16),
+]
 
 industry.add_tile(
     id="liquids_terminal_tile_1",

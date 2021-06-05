@@ -31,6 +31,10 @@ from cargos import ammonium_nitrate
 ammonium_nitrate.cargo.register()
 """
 
+from cargos import apples
+
+apples.cargo.register()
+
 """
 from cargos import bauxite
 bauxite.cargo.register()
@@ -411,10 +415,9 @@ from cargos import sulphur
 
 sulphur.cargo.register()
 
-""" BLTC
 from cargos import sulphuric_acid
+
 sulphuric_acid.cargo.register()
-"""
 
 """
 from cargos import sugar_beet

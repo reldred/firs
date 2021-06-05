@@ -25,6 +25,7 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].accept_cargos_with_input_ratios 
     ("CASS", 6),
     ("MAIZ", 6),
 ]
+industry.economy_variations["MILD_MILD_WEST"].enabled = True
 
 industry.add_tile(
     id="flour_mill_tile_1",

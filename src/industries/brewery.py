@@ -24,6 +24,10 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].accept_cargos_with_input_ratios 
     ("MAIZ", 4),
 ]
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
+industry.economy_variations["BASIC_TEMPERATE"].name = "string(STR_IND_CIDER_MILL)"
+industry.economy_variations["MILD_MILD_WEST"].accept_cargos_with_input_ratios = [
+    ("AAPL", 6),
+]
 
 industry.add_tile(
     id="brewery_tile_1",
