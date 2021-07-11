@@ -23,7 +23,9 @@ industry.economy_variations["STEELTOWN"].enabled = True
 industry.economy_variations[
     "STEELTOWN"
 ].prob_in_game = "1"  # low chance of build during gameplay
+
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
+industry.economy_variations["MILD_MILD_WEST"].name = "string(STR_IND_STEEL_MINIMILL)"
 industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_output_ratios = [
     ("STSH", 3),
     ("STWR", 3),
