@@ -34,7 +34,7 @@ industry.economy_variations["IN_A_HOT_COUNTRY"].prod_cargo_types_with_multiplier
 ###industry.economy_variations['BETTER_LIVING_THROUGH_CHEMISTRY'].prod_cargo_types_with_multipliers = [('OIL_', 20), ('POTA', 12), ('PHOS', 12), ('MEOH', 12)]
 
 industry.economy_variations["MILD_MILD_WEST"].enabled = True
-#industry.economy_variations["MILD_MILD_WEST"].accept_cargo_types = ["FOOD", "POTA", "CHLO"]
+# industry.economy_variations["MILD_MILD_WEST"].accept_cargo_types = ["FOOD", "POTA", "CHLO"]
 industry.economy_variations["MILD_MILD_WEST"].prod_cargo_types_with_multipliers = [
     ("IORE", 19),
 ]
