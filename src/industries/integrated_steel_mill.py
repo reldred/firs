@@ -17,6 +17,16 @@ industry = IndustrySecondary(
 industry.economy_variations["BASIC_TEMPERATE"].enabled = True
 industry.economy_variations["BASIC_TEMPERATE"].intro_year = 1800
 
+industry.economy_variations["MILD_MILD_WEST"].enabled = True
+industry.economy_variations["MILD_MILD_WEST"].accept_cargos_with_input_ratios = [
+    ("IORE", 3),
+    ("COKE", 3),
+    ("LIME", 2),
+]
+industry.economy_variations[
+    "MILD_MILD_WEST"
+].prob_in_game = "0"  # do not build during gameplay
+
 industry.add_tile(
     id="integrated_steel_mill_tile_1",
     animation_length=7,
