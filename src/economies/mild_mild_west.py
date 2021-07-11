@@ -43,6 +43,7 @@ economy = Economy(
         "sulphuric_acid",
         "tin",
         "tinplate",
+        "vegetables",
         "vehicles",
         "zinc",
     ],
