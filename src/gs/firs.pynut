@@ -1,0 +1,20 @@
+firs <- {};
+
+firs.industries <- {};
+
+<tal:industries repeat="industry registered_industries">
+    local industry = {};
+    industry.numeric_id <- ${industry.numeric_id};
+    industry.economy_variations <- {}
+    <tal:economies repeat="economy registered_economies">
+        industry.economy_variations[${economy.numeric_id}] <- {};
+        industry.economy_variations[${economy.numeric_id}].accept_cargo_types <- [${gs_helper.get_accept_cargos_as_array_contents(industry, economy)}];
+    </tal:economies>
+    firs["industries"]["${industry.id}"] <- industry;
+</tal:industries>
+
+firs.economy_fingerprints  <- {}
+<tal:economies repeat="economy registered_economies">
+    firs.economy_fingerprints[${economy.numeric_id}] <- "${gs_helper.get_economy_fingerprint(registered_industries, economy)}";
+</tal:economies>
+
